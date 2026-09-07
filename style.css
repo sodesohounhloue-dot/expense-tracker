@@ -18,10 +18,14 @@ body {
 }
 
 h1 {
-    background-color: #d0c222;
+    background-color: #024442;
+    color: #ffffff;
     border-radius: 30px;
     padding: 10px;
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 input[type="text"], input[type="number"] {
