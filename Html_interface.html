@@ -3,34 +3,64 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>Expense Tracker</title>
+
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
-    <link rel="stylesheet" href="style.css">
+
     <body>
-        <h1>Expense Tracker</h1>
-        <p>Bienvenue dans votre suivi des dépenses !</p>
-        <div class="Solde">
-            <h2>Solde actuel : <span id="currentBalance">0.00 €</span></h2>
+
+        <div class="container">
+
+            <h1>💳 Expense Tracker</h1>
+
+            <div class="cards">
+
+                <div class="card balance">
+                <h3>Solde</h3>
+                <h2 id="balance">GH₵0.00</h2>
+            </div>
+
+            <div class="card income">
+                <h3>Revenus</h3>
+                <h2 id="income">GH₵0.00</h2>
+            </div>
+
+            <div class="card expense">
+            <h3>Dépenses</h3>
+            <h2 id="expense">GH₵0.00</h2>
+            </div>
+
         </div>
 
-        <form id="TransactionForm">
-            <label for="transactionType">Type de transaction :</label>
-            <select id="transactionType" required>
-                <option value="income">Revenu</option>
-                <option value="expense">Dépense</option>
-            </select>
+    <form id="transactionForm">
 
-            <label for="amount">Montant :</label>
-            <input type="number" id="amount" step="0.01" required>
-            <input id="name" type="text" placeholder="Nom" required>
+    <input id="name" type="text" placeholder="Nom" required>
 
-            <button type="submit">Ajouter</button>
-        </form>
+    <input id="amount" type="number" placeholder="Montant" required>
 
-        <ul id="historyList">
-            <!-- Les transactions seront ajoutées ici -->
-        </ul>
+    <select id="type">
+    <option value="income">💰 Revenu</option>
+    <option value="expense">💸 Dépense</option>
+    </select>
 
-        <script src="script.js"></script>
+    <button type="submit">Ajouter</button>
+
+    </form>
+
+    <h2>Historique</h2>
+
+    <ul id="history"></ul>
+
+    <h2>Statistiques</h2>
+
+    <canvas id="expenseChart"></canvas>
+
+    </div>
+
+    <script src="script.js"></script>
+
     </body>
 </html>

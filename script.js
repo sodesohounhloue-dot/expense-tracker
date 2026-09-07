@@ -1,43 +1,88 @@
-const form = document.getElementById("TransactionForm");
-const type = document.getElementById("transactionType");
-const amount = document.getElementById("amount");
-const nameInput = document.getElementById("name");
+const form=document.getElementById("transactionForm");
+const history=document.getElementById("history");
 
-const balance = document.getElementById("currentBalance");
-const history = document.getElementById("historyList");
+const balance=document.getElementById("balance");
+const income=document.getElementById("income");
+const expense=document.getElementById("expense");
 
-let transactions = [];
+let transactions=JSON.parse(localStorage.getItem("transactions"))||[];
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
+const ctx=document.getElementById("expenseChart");
 
-    transactions.push({
-        name: nameInput.value,
-        amount: Number(amount.value),
-        type: type.value
-    });
-
-    updateUI();
-    form.reset();
+let chart=new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Revenus","Dépenses"],
+datasets:[{
+data:[0,0]
+}]
+}
 });
 
-function updateUI(){
-    history.innerHTML = "";
+form.addEventListener("submit",e=>{
 
-    let income = 0;
-    let expense = 0;
+e.preventDefault();
 
-    transactions.forEach(t => {
-        const li = document.createElement("li");
-        li.textContent = `${t.name} : ${t.amount.toFixed(2)} €`;
-        history.appendChild(li);
+transactions.push({
 
-        if(t.type === "income"){
-            income += t.amount;
-        }else{
-            expense += t.amount;
-        }
-    });
+name:document.getElementById("name").value,
+amount:Number(document.getElementById("amount").value),
+type:document.getElementById("type").value
 
-    balance.textContent = (income - expense).toFixed(2) + " €";
+});
+
+save();
+render();
+form.reset();
+
+});
+
+function render(){
+
+history.innerHTML="";
+
+let totalIncome=0;
+let totalExpense=0;
+
+transactions.forEach((t,index)=>{
+
+const li=document.createElement("li");
+
+li.innerHTML=`
+<span>${t.name} - GH₵${t.amount}</span>
+<button onclick="removeTransaction(${index})">✖</button>
+`;
+
+history.appendChild(li);
+
+if(t.type==="income")
+totalIncome+=t.amount;
+else
+totalExpense+=t.amount;
+
+});
+
+balance.textContent="GH₵"+(totalIncome-totalExpense).toFixed(2);
+income.textContent="GH₵"+totalIncome.toFixed(2);
+expense.textContent="GH₵"+totalExpense.toFixed(2);
+
+chart.data.datasets[0].data=[totalIncome,totalExpense];
+chart.update();
+
 }
+
+function removeTransaction(index){
+
+transactions.splice(index,1);
+save();
+render();
+
+}
+
+function save(){
+
+localStorage.setItem("transactions",JSON.stringify(transactions));
+
+}
+
+render();
