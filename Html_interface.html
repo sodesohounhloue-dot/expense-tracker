@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expense Tracker</title>
+    </head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="script" href="script.js" defer>
+    <body>
+        <h1>Expense Tracker</h1>
+        <p>Bienvenue dans votre suivi des dépenses !</p>
+        <div class="Solde">
+            <h2>Solde actuel : <span id="currentBalance">0.00 €</span></h2>
+        </div>
+
+        <form id="TransactionForm">
+            <label for="transactionType">Type de transaction :</label>
+            <select id="transactionType" required>
+                <option value="income">Revenu</option>
+                <option value="expense">Dépense</option>
+            </select>
+
+            <label for="amount">Montant :</label>
+            <input type="number" id="amount" step="0.01" required>
+
+            <button type="submit">Ajouter</button>
+        </form>
+    </body>
+</html>
