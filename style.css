@@ -1,5 +1,5 @@
 button {
-    background-color: #4CAF50;
+    background-color: #1E293B;
     border-radius: 30px;
     color: white;
     padding: 15px 32px;
@@ -14,7 +14,8 @@ button {
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #2fe3c8;
+    background-color: #0F172A;
+    color: #ffffff;
 }
 
 h1 {
